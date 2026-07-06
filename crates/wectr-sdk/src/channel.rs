@@ -8,6 +8,8 @@ use core::{
 
 use crate::rt;
 
+/// # Safety
+/// Every bit pattern must be a valid `T`: `#[repr(C)]`.
 pub unsafe trait Pod: Copy {}
 
 macro_rules! pod_prims {
