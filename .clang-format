@@ -1,0 +1,35 @@
+Language: Cpp
+BasedOnStyle: WebKit
+
+ColumnLimit: 80
+IndentWidth: 2
+TabWidth: 2
+UseTab: Never
+ContinuationIndentWidth: 4
+
+BreakBeforeBraces: Attach
+
+BinPackArguments: true
+BinPackParameters: true
+AlignAfterOpenBracket: Align
+
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AllowShortBlocksOnASingleLine: Never
+
+SpaceBeforeParens: ControlStatements
+SpaceAfterCStyleCast: true
+SpaceBeforeSquareBrackets: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+Cpp11BracedListStyle: true
+PointerAlignment: Right
+
+IndentCaseLabels: true
+IndentCaseBlocks: false
+
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+MaxEmptyLinesToKeep: 1
+ReflowComments: true

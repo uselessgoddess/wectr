@@ -1,0 +1,10 @@
+[package]
+name = "wectr-sdk"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+dlmalloc = { version = "0.2", features = ["global"], optional = true }
+
+[features]
+guest = ["dep:dlmalloc"]

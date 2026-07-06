@@ -1,0 +1,10 @@
+version = "Two"
+
+merge_derives = false
+group_imports = "StdExternalCrate"
+imports_granularity = "Crate"
+use_small_heuristics = "Max"
+use_field_init_shorthand = true
+
+tab_spaces = 2
+max_width = 80

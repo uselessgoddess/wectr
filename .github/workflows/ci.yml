@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+  RUSTFLAGS: -D warnings
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: rustfmt
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+          targets: wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@v2
+
+      - name: fmt --check
+        run: |
+          cargo +nightly fmt --all --check
+          cargo +nightly fmt --manifest-path examples/bot/Cargo.toml --check
+
+      - name: clippy -D warnings
+        run: cargo clippy --workspace --all-targets -- -D warnings
+
+      - name: test --workspace
+        run: cargo test --workspace
+
+      - name: check guest
+        run: |
+          cargo clippy --release --manifest-path examples/bot/Cargo.toml \
+            --target wasm32-unknown-unknown -- -D warnings
+          cargo build --release --manifest-path examples/bot/Cargo.toml \
+            --target wasm32-unknown-unknown
+
+      - name: build WAMR host
+        run: |
+          cmake -S host -B build/host -DCMAKE_BUILD_TYPE=Release
+          cmake --build build/host -j"$(nproc)"
